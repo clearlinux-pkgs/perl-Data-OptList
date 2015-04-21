@@ -1,0 +1,4 @@
+PKG_NAME := perl-Data-OptList
+URL := http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.109.tar.gz
+
+include ../common/Makefile.common
