@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.109
-Release  : 5
+Release  : 6
 URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.109.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.109.tar.gz
 Summary  : 'parse and validate simple name/value option pairs'
