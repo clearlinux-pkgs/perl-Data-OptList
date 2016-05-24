@@ -4,12 +4,12 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 10
+Release  : 11
 URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Summary  : 'parse and validate simple name/value option pairs'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0-Perl Artistic-2.0
 Requires: perl-Data-OptList-doc
 BuildRequires : perl(Params::Util)
 BuildRequires : perl(Sub::Install)
@@ -59,7 +59,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.22.0/Data/OptList.pm
+/usr/lib/perl5/site_perl/5.24.0/Data/OptList.pm
 
 %files doc
 %defattr(-,root,root,-)
