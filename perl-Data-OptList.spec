@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 12
+Release  : 13
 URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Summary  : 'parse and validate simple name/value option pairs'
@@ -31,6 +31,10 @@ doc components for the perl-Data-OptList package.
 %setup -q -n Data-OptList-0.110
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make V=1  %{?_smp_mflags}
@@ -40,9 +44,10 @@ else
 fi
 
 %check
+export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make TEST_VERBOSE=1 test
 
 %install
@@ -59,7 +64,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.24.0/Data/OptList.pm
+/usr/lib/perl5/site_perl/5.26.0/Data/OptList.pm
 
 %files doc
 %defattr(-,root,root,-)
