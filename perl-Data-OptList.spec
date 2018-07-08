@@ -4,13 +4,16 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 14
-URL      : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
-Source0  : http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
+Release  : 15
+URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
+Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
+Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
 Summary  : 'parse and validate simple name/value option pairs'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl Artistic-2.0
-Requires: perl-Data-OptList-doc
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Data-OptList-license
+Requires: perl-Data-OptList-man
+Requires: perl(Sub::Install)
 BuildRequires : perl(Sub::Install)
 BuildRequires : perl-Params-Util
 
@@ -19,16 +22,28 @@ This archive contains the distribution Data-OptList,
 version 0.110:
 parse and validate simple name/value option pairs
 
-%package doc
-Summary: doc components for the perl-Data-OptList package.
-Group: Documentation
+%package license
+Summary: license components for the perl-Data-OptList package.
+Group: Default
 
-%description doc
-doc components for the perl-Data-OptList package.
+%description license
+license components for the perl-Data-OptList package.
+
+
+%package man
+Summary: man components for the perl-Data-OptList package.
+Group: Default
+
+%description man
+man components for the perl-Data-OptList package.
 
 
 %prep
+tar -xf %{SOURCE1}
+cd ..
 %setup -q -n Data-OptList-0.110
+mkdir -p %{_topdir}/BUILD/Data-OptList-0.110/deblicense/
+mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Data-OptList-0.110/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -37,7 +52,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 else
 %{__perl} Build.PL
 ./Build
@@ -52,6 +67,9 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/perl-Data-OptList
+cp LICENSE %{buildroot}/usr/share/doc/perl-Data-OptList/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Data-OptList/deblicense_copyright
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot}
 else
@@ -66,6 +84,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %defattr(-,root,root,-)
 /usr/lib/perl5/site_perl/5.26.1/Data/OptList.pm
 
-%files doc
+%files license
 %defattr(-,root,root,-)
-%doc /usr/share/man/man3/*
+/usr/share/doc/perl-Data-OptList/LICENSE
+/usr/share/doc/perl-Data-OptList/deblicense_copyright
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man3/Data::OptList.3
