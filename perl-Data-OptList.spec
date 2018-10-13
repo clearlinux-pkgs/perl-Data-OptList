@@ -4,16 +4,15 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 17
+Release  : 18
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-optlist-perl/libdata-optlist-perl_0.110-1.debian.tar.xz
 Summary  : 'parse and validate simple name/value option pairs'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-Data-OptList-license
-Requires: perl-Data-OptList-man
-Requires: perl(Sub::Install)
+Requires: perl-Data-OptList-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(Sub::Install)
 BuildRequires : perl-Params-Util
 
@@ -21,6 +20,15 @@ BuildRequires : perl-Params-Util
 This archive contains the distribution Data-OptList,
 version 0.110:
 parse and validate simple name/value option pairs
+
+%package dev
+Summary: dev components for the perl-Data-OptList package.
+Group: Development
+Provides: perl-Data-OptList-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-Data-OptList package.
+
 
 %package license
 Summary: license components for the perl-Data-OptList package.
@@ -30,19 +38,11 @@ Group: Default
 license components for the perl-Data-OptList package.
 
 
-%package man
-Summary: man components for the perl-Data-OptList package.
-Group: Default
-
-%description man
-man components for the perl-Data-OptList package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n Data-OptList-0.110
-mkdir -p %{_topdir}/BUILD/Data-OptList-0.110/deblicense/
+cd ..
+%setup -q -T -D -n Data-OptList-0.110 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/Data-OptList-0.110/deblicense/
 
 %build
@@ -67,13 +67,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-Data-OptList
-cp LICENSE %{buildroot}/usr/share/doc/perl-Data-OptList/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-Data-OptList/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-Data-OptList
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Data-OptList/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Data-OptList/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -82,13 +82,13 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Data/OptList.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Data/OptList.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-Data-OptList/LICENSE
-/usr/share/doc/perl-Data-OptList/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Data::OptList.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-Data-OptList/LICENSE
+/usr/share/package-licenses/perl-Data-OptList/deblicense_copyright
