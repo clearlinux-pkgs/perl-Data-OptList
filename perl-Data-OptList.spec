@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-optlist-perl/libdata-optlist-perl_0.110-1.debian.tar.xz
@@ -82,7 +82,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Data-OptList
 cp %{_builddir}/Data-OptList-0.110/LICENSE %{buildroot}/usr/share/package-licenses/perl-Data-OptList/b72beea94f4d58e0983ced97079a9b147dcb37b2
-cp %{_builddir}/Data-OptList-0.110/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-Data-OptList/6e2929637fd4a11394110fd2c25cb98cea29cdee
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-Data-OptList/6e2929637fd4a11394110fd2c25cb98cea29cdee
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -107,4 +107,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Data/OptList.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Data/OptList.pm
