@@ -4,7 +4,7 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.110
-Release  : 29
+Release  : 30
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.110.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-optlist-perl/libdata-optlist-perl_0.110-1.debian.tar.xz
@@ -107,4 +107,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/Data/OptList.pm
+/usr/lib/perl5/vendor_perl/5.30.3/Data/OptList.pm
