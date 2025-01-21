@@ -7,7 +7,7 @@
 #
 Name     : perl-Data-OptList
 Version  : 0.114
-Release  : 46
+Release  : 47
 URL      : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.114.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Data-OptList-0.114.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdata-optlist-perl/libdata-optlist-perl_0.110-1.debian.tar.xz
